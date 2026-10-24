@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared update policy for matbind's repos. Use with {\"extends\": [\"github>matbind/renovate-config\"]}.",
+  "extends": ["config:recommended", ":timezone(Europe/Vienna)"],
+  "dependencyDashboard": false,
+  "automerge": false,
+  "minimumReleaseAge": "3 days",
+  "internalChecksFilter": "strict",
+  "prCreation": "not-pending",
+  "osvVulnerabilityAlerts": true,
+  "schedule": ["* 22-23 * * 0-4", "* 0-5 * * 1-5"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["* 0-5 1 * *"]
+  },
+  "packageRules": [
+    {
+      "description": "One PR per repo per week for everything below a major.",
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "minor and patch updates",
+      "groupSlug": "minor-patch",
+      "schedule": ["* 0-5 * * 1"]
+    },
+    {
+      "description": "Majors get their own PR and are never merged automatically.",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ]
+}
