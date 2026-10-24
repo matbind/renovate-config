@@ -1,21 +1,17 @@
 # renovate-config
 
-The shared Renovate policy for matbind's repos. A repo opts in with:
+The shared Renovate policy for matbind's repos. The settings themselves, each with its reason,
+are in the JSON files; this page only says which preset to pick.
 
-```json
-{ "extends": ["github>matbind/renovate-config"] }
-```
-
-| Setting | Value | Why |
+| Preset | Use for | Extends with |
 |---|---|---|
-| `minimumReleaseAge` | 3 days | protects against malicious or pulled releases |
-| security fixes | immediately, with no release age and no schedule | Renovate's default for vulnerability alerts; `osvVulnerabilityAlerts` covers GitLab too |
-| minor + patch | one grouped PR per repo, Monday night | few PRs |
-| major | its own PR, never automerged | framework majors need a person |
-| lockfile maintenance | monthly, night of the 1st | transitive fixes |
-| schedule | weekday nights, Europe/Vienna | PRs are ready in the morning |
-| dependency dashboard | off | no issue per repo |
-| automerge | off | turned on per repo only where CI runs tests |
+| [`default.json`](default.json) | repos with CI that runs the tests | `{"extends": ["github>matbind/renovate-config"]}` |
+| [`security-only.json`](security-only.json) | repos without CI or active development | `{"extends": ["github>matbind/renovate-config:security-only"]}` |
 
-Renovate runs self-hosted on the ops-watch watchers (heimdall for Amfortas, dssh for personal
-projects). See `matbind/ops-watch`, DESIGN.md, section "Renovate".
+The idea behind `default.json`: few PRs, and none that need attention by surprise. New releases
+wait 3 days, security fixes don't wait. Minor and patch updates come as one weekly PR. Majors
+open only after approval in the repo's dependency dashboard issue. Nothing is merged
+automatically unless a repo turns it on for itself.
+
+Renovate runs self-hosted in GitHub Actions, one runner repo per area (`renovate-personal`,
+`renovate-amfortas`). A repo is managed only once its onboarding PR is merged.

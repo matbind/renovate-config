@@ -4,9 +4,6 @@
   "extends": ["config:recommended", ":timezone(Europe/Vienna)"],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate: dependency dashboard",
-  "major": {
-    "dependencyDashboardApproval": true
-  },
   "automerge": false,
   "minimumReleaseAge": "3 days",
   "internalChecksFilter": "strict",
@@ -28,6 +25,7 @@
     {
       "description": "Majors get their own PR, only after approval in the dashboard, and are never merged automatically.",
       "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
       "automerge": false
     }
   ]
