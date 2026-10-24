@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Security fixes and monthly lockfile maintenance only, for repos without CI or active development. Use with {\"extends\": [\"github>matbind/renovate-config:security-only\"]}.",
+  "extends": ["github>matbind/renovate-config", "security:only-security-updates"],
+  "packageRules": [
+    {
+      "description": "security:only-security-updates disables every update; lockfile maintenance pulls in transitive fixes, so it stays on.",
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "enabled": true
+    }
+  ]
+}
