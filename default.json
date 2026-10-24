@@ -2,7 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Shared update policy for matbind's repos. Use with {\"extends\": [\"github>matbind/renovate-config\"]}.",
   "extends": ["config:recommended", ":timezone(Europe/Vienna)"],
-  "dependencyDashboard": false,
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate: dependency dashboard",
+  "major": {
+    "dependencyDashboardApproval": true
+  },
   "automerge": false,
   "minimumReleaseAge": "3 days",
   "internalChecksFilter": "strict",
@@ -22,7 +26,7 @@
       "schedule": ["* 0-5 * * 1"]
     },
     {
-      "description": "Majors get their own PR and are never merged automatically.",
+      "description": "Majors get their own PR, only after approval in the dashboard, and are never merged automatically.",
       "matchUpdateTypes": ["major"],
       "automerge": false
     }
