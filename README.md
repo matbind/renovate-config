@@ -10,8 +10,10 @@ are in the JSON files; this page only says which preset to pick.
 
 The idea behind `default.json`: few PRs, and none that need attention by surprise. New releases
 wait 3 days, security fixes don't wait. Minor and patch updates come as one weekly PR. Majors
-open only after approval in the repo's dependency dashboard issue. Nothing is merged
-automatically unless a repo turns it on for itself.
+open only after approval in the repo's dependency dashboard issue. Everything below a major
+merges by itself once CI is green; a repo without CI never automerges, so its PRs wait for
+Mathias to merge them by hand (a weekly Monday review of the dependency dashboards, which also
+approves majors).
 
 Renovate runs self-hosted in GitHub Actions, one runner repo per area (`renovate-personal`,
 `renovate-amfortas`). A repo is managed only once its onboarding PR is merged.
