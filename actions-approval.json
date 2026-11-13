@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "The shared policy, plus dashboard approval for every GitHub Actions update and every security fix, for repos with CI whose green check is trusted to ship a change, such as a deploy that takes only commits that passed it. Use with {\"extends\": [\"github>matbind/renovate-config:actions-approval\"]}.",
+  "extends": ["github>matbind/renovate-config"],
+  "vulnerabilityAlerts": {
+    "description": "Renovate forces these settings onto every security fix, over any package rule, so without approval here a security fix to an action would open its PR at once and run the changed action in the checks. Security fixes for every manager wait for approval in the dashboard; an approved one opens on the next run.",
+    "dependencyDashboardApproval": true
+  },
+  "packageRules": [
+    {
+      "description": "An Actions update changes the workflow that checks its own PR, so a green check does not vouch for it: it opens only after approval in the dashboard and is never merged automatically.",
+      "matchManagers": ["github-actions"],
+      "dependencyDashboardApproval": true,
+      "automerge": false
+    },
+    {
+      "description": "A branch waits for approval when any update in it does, so Actions minor and patch updates get their own weekly group instead of holding back the shared one.",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "GitHub Actions minor and patch updates",
+      "groupSlug": "github-actions-minor-patch"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ are in the JSON files; this page only says which preset to pick.
 | Preset | Use for | Extends with |
 |---|---|---|
 | [`default.json`](default.json) | repos with CI that runs the tests | `{"extends": ["github>matbind/renovate-config"]}` |
+| [`actions-approval.json`](actions-approval.json) | repos with CI whose green check is trusted to ship a change, such as a deploy that takes only commits that passed it; GitHub Actions updates and security fixes open only after approval in the dashboard | `{"extends": ["github>matbind/renovate-config:actions-approval"]}` |
 | [`security-only.json`](security-only.json) | repos without CI or active development | `{"extends": ["github>matbind/renovate-config:security-only"]}` |
 
 The idea behind `default.json`: few PRs, and none that need attention by surprise. New releases
